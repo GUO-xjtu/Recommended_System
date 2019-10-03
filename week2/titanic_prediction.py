@@ -15,11 +15,13 @@ import sklearn.preprocessing as preprocessing
 
 class TitanPrediction():
     def __init__(self):
-
+        """
+        运行之前请先修改字体文件路径，在week2/data/msyhbd.ttf中，使用绝对路径
+        """
         self.train_data = pd.read_csv(r'/Users/apple/PycharmProjects/homework/week2/data/train.csv')
         self.test_data = pd.read_csv(r'/Users/apple/PycharmProjects/homework/week2/data/test.csv')
         # 定义自定义字体
-        self.myfont = FontProperties(fname='/Users/apple/Downloads/weuruan/msyhbd.ttf')
+        self.myfont = FontProperties(fname='/Users/apple/PycharmProjects/homework/week2/data/msyhbd.ttf')
 
     # 数据探索
     def explore_data(self):
