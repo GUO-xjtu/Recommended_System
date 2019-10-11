@@ -147,10 +147,6 @@ def mine_tree(headerTable, minSup, preFix, freqItemList):
         myCondTree, myHead = create_tree(condPattBases, minSup)
 
         if myHead is not None:
-            # print('basePat: ', basePat)
-            # print('conditional tree for: ', newFreqSet)
-            # myCondTree.put_node_tree()
-            # print('\n\n\n')
             mine_tree(myHead, minSup, newFreqSet, freqItemList)
 
 
@@ -174,14 +170,7 @@ def rules_generator(freqItems, minConf, rules):
 def get_rules(freqset, currset, rules, freqItems, minConf):
     for item in currset:
         subSet = remove_str(currset, item)
-        # print('item: ', item)
-        # print('currset: ', currset)
-        # print(currset, '： ', freqItems[freqset])
-        # print(subSet, '：', freqItems[subSet])
         confidence = freqItems[freqset] / freqItems[subSet]
-        # print('confidence: ', confidence)
-        # print((subSet, freqset-subSet, confidence))
-        # print('\n\n')
         # 若置信度大与阈值，则保存此关联规则
         if confidence >= minConf:
             flag = False
@@ -204,31 +193,7 @@ def fpGrowth(dataSet, minSup=3, minConf=0.5):
     mine_tree(myHeaderTab, minSup, set([]), freqItems)
     rules = []
     rules_generator(freqItems, minConf, rules)
-    print(freqItems.items())
     freqItems = [item for item in sorted(freqItems.items(), key=lambda b:b[1], reverse=True)]
     rules = [item for item in sorted(rules, key=lambda b: b[2], reverse=True)]
     return freqItems, rules
 
-
-# 测试
-def load():
-    simDit = [['r', 'z','h','j','p'],['z','y','x','w','v','u','t','s'],
-              ['z'], ['r','x','n','o','s'], ['y','r','x','z','q','t','p'],
-              ['y','z','x','e','q','s','t','m']
-    ]
-    return simDit
-
-# initdata = load()
-# initset = create_init_set(initdata)
-# # print(initset)
-# myFptree, myHeader = create_tree(initset, 2)
-# condpats = find_prefix_path('t', myHeader['t'][1])
-# # print(myFptree.put_node_tree())
-# # print(myHeader)
-# # print('t:', condpats)
-# frm = {}
-# mine_tree(myHeader, 2, set(), frm)
-# print(frm)
-# rules = []
-# rules_generator(frm, 0.2, rules)
-# print(rules)
